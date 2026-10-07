@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Performance | EduTrack</title>
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- Chart.js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet"
+        href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================= -->
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <span>
+                EduTrack
+            </span>
+
+        </div>
+
+
+
+        <!-- ADMIN -->
+
+        <div class="admin-profile">
+
+            <div class="profile-icon">
+
+                <i class="fa-solid fa-user-tie"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Admin
+                </h3>
+
+                <p>
+                    Administrator
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav>
+
+
+            <a href="admin.html">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+
+            <a href="students.html">
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                <span>
+                    Students
+                </span>
+
+            </a>
+
+
+
+            <a href="settings.html">
+
+                <i class="fa-solid fa-book"></i>
+
+                <span>
+                    Subjects
+                </span>
+
+            </a>
+
+
+
+            <a href="performance.html"
+                class="active">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+                    Performance
+                </span>
+
+            </a>
+
+
+
+            <a href="reports.html">
+
+                <i class="fa-solid fa-file-lines"></i>
+
+                <span>
+                    Reports
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- LOGOUT -->
+
+        <div class="logout">
+
+            <a href="login.html">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <h1>
+                    Performance
+                </h1>
+
+                <p>
+                    Analyze student academic performance
+                </p>
+
+            </div>
+
+
+
+            <div class="top-actions">
+
+
+                <button class="icon-btn">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification">
+                        3
+                    </span>
+
+                </button>
+
+
+
+                <div class="admin-mini">
+
+                    <div class="mini-avatar">
+                        A
+                    </div>
+
+                    <span>
+                        Admin
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             PERFORMANCE SUMMARY
+        ================================================= -->
+
+        <section class="performance-stats">
+
+
+            <!-- AVERAGE -->
+
+            <div class="performance-stat-card">
+
+                <div class="performance-stat-icon purple">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                </div>
+
+
+                <div>
+
+                    <p>
+                        Average Score
+                    </p>
+
+                    <h2 id="averageScore">
+                        0%
+                    </h2>
+
+                    <span>
+                        Overall performance
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- EXCELLENT -->
+
+            <div class="performance-stat-card">
+
+                <div class="performance-stat-icon green">
+
+                    <i class="fa-solid fa-star"></i>
+
+                </div>
+
+
+                <div>
+
+                    <p>
+                        Excellent
+                    </p>
+
+                    <h2 id="excellentCount">
+                        0
+                    </h2>
+
+                    <span>
+                        Score 90%+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NEED IMPROVEMENT -->
+
+            <div class="performance-stat-card">
+
+                <div class="performance-stat-icon orange">
+
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+
+                </div>
+
+
+                <div>
+
+                    <p>
+                        Needs Improvement
+                    </p>
+
+                    <h2 id="improvementCount">
+                        0
+                    </h2>
+
+                    <span>
+                        Score below 60%
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TOP SCORE -->
+
+            <div class="performance-stat-card">
+
+                <div class="performance-stat-icon pink">
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                </div>
+
+
+                <div>
+
+                    <p>
+                        Highest Score
+                    </p>
+
+                    <h2 id="highestScore">
+                        0%
+                    </h2>
+
+                    <span id="topStudentName">
+                        No student
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             CHARTS
+        ================================================= -->
+
+        <section class="performance-chart-grid">
+
+
+            <!-- PERFORMANCE DISTRIBUTION -->
+
+            <div class="performance-card">
+
+
+                <div class="performance-card-header">
+
+                    <div>
+
+                        <h2>
+                            Performance Distribution
+                        </h2>
+
+                        <p>
+                            Students by performance level
+                        </p>
+
+                    </div>
+
+
+                    <div class="chart-icon">
+
+                        <i class="fa-solid fa-chart-pie"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-wrapper">
+
+                    <canvas
+                        id="performanceChart">
+                    </canvas>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- COURSE PERFORMANCE -->
+
+            <div class="performance-card">
+
+
+                <div class="performance-card-header">
+
+                    <div>
+
+                        <h2>
+                            Course Performance
+                        </h2>
+
+                        <p>
+                            Average score by course
+                        </p>
+
+                    </div>
+
+
+                    <div class="chart-icon">
+
+                        <i class="fa-solid fa-chart-column"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-wrapper">
+
+                    <canvas
+                        id="courseChart">
+                    </canvas>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             TOP PERFORMERS
+        ================================================= -->
+
+        <div class="performance-card top-performers-card">
+
+
+            <div class="performance-card-header">
+
+                <div>
+
+                    <h2>
+                        Top Performers
+                    </h2>
+
+                    <p>
+                        Highest scoring students
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="performance-view-btn"
+                    onclick="window.location.href='students.html'">
+
+                    View Students
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="top-performers"
+                id="topPerformers">
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             STUDENT PERFORMANCE TABLE
+        ================================================= -->
+
+        <div class="performance-card">
+
+
+            <div class="performance-card-header">
+
+                <div>
+
+                    <h2>
+                        Student Performance
+                    </h2>
+
+                    <p>
+                        Detailed academic performance
+                    </p>
+
+                </div>
+
+
+                <select
+                    id="performanceFilter"
+                    onchange="filterPerformanceTable()">
+
+                    <option value="all">
+                        All Students
+                    </option>
+
+                    <option value="excellent">
+                        Excellent
+                    </option>
+
+                    <option value="good">
+                        Good
+                    </option>
+
+                    <option value="average">
+                        Average
+                    </option>
+
+                    <option value="needs">
+                        Needs Improvement
+                    </option>
+
+                </select>
+
+
+            </div>
+
+
+
+            <div class="performance-table-container">
+
+
+                <table
+                    class="performance-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Student
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Score
+                            </th>
+
+                            <th>
+                                Performance
+                            </th>
+
+                            <th>
+                                Progress
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="performanceTableBody">
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =================================================
+     JAVASCRIPT
+================================================= -->
+
+<script>
+
+
+/* =====================================================
+   GET STUDENTS FROM LOCAL STORAGE
+===================================================== */
+
+let students =
+    JSON.parse(
+        localStorage.getItem(
+            "eduTrackStudents"
+        )
+    ) || [];
+
+
+/* =====================================================
+   PERFORMANCE
+===================================================== */
+
+function getPerformance(score) {
+
+    score = Number(score);
+
+
+    if (score >= 90) {
+
+        return "Excellent";
+
+    }
+
+
+    if (score >= 80) {
+
+        return "Good";
+
+    }
+
+
+    if (score >= 60) {
+
+        return "Average";
+
+    }
+
+
+    return "Needs Improvement";
+
+}
+
+
+/* =====================================================
+   PERFORMANCE CLASS
+===================================================== */
+
+function getPerformanceClass(score) {
+
+    score = Number(score);
+
+
+    if (score >= 90) {
+
+        return "excellent";
+
+    }
+
+
+    if (score >= 80) {
+
+        return "good";
+
+    }
+
+
+    if (score >= 60) {
+
+        return "average";
+
+    }
+
+
+    return "needs";
+
+}
+
+
+/* =====================================================
+   INITIALS
+===================================================== */
+
+function getInitials(name) {
+
+    const words =
+        name.trim().split(" ");
+
+
+    if (words.length >= 2) {
+
+        return (
+            words[0][0] +
+            words[words.length - 1][0]
+        ).toUpperCase();
+
+    }
+
+
+    return name
+        .substring(0, 2)
+        .toUpperCase();
+
+}
+
+
+/* =====================================================
+   UPDATE SUMMARY
+===================================================== */
+
+function updatePerformanceSummary() {
+
+
+    if (students.length === 0) {
+
+        document.getElementById(
+            "averageScore"
+        ).innerText = "0%";
+
+
+        document.getElementById(
+            "excellentCount"
+        ).innerText = "0";
+
+
+        document.getElementById(
+            "improvementCount"
+        ).innerText = "0";
+
+
+        document.getElementById(
+            "highestScore"
+        ).innerText = "0%";
+
+
+        document.getElementById(
+            "topStudentName"
+        ).innerText = "No student";
+
+
+        return;
+
+    }
+
+
+    /* TOTAL */
+
+    let total = 0;
+
+
+    students.forEach(student => {
+
+        total += Number(student.score);
+
+    });
+
+
+    /* AVERAGE */
+
+    const average =
+        Math.round(
+            total / students.length
+        );
+
+
+    document.getElementById(
+        "averageScore"
+    ).innerText =
+        average + "%";
+
+
+    /* EXCELLENT */
+
+    const excellent =
+        students.filter(
+            student =>
+                Number(student.score) >= 90
+        ).length;
+
+
+    document.getElementById(
+        "excellentCount"
+    ).innerText =
+        excellent;
+
+
+    /* NEEDS IMPROVEMENT */
+
+    const needs =
+        students.filter(
+            student =>
+                Number(student.score) < 60
+        ).length;
+
+
+    document.getElementById(
+        "improvementCount"
+    ).innerText =
+        needs;
+
+
+    /* TOP */
+
+    const sorted =
+        [...students].sort(
+            (a, b) =>
+                Number(b.score) -
+                Number(a.score)
+        );
+
+
+    const top =
+        sorted[0];
+
+
+    document.getElementById(
+        "highestScore"
+    ).innerText =
+        top.score + "%";
+
+
+    document.getElementById(
+        "topStudentName"
+    ).innerText =
+        top.name;
+
+}
+
+
+/* =====================================================
+   PERFORMANCE CHART
+===================================================== */
+
+let performanceChart;
+
+
+function createPerformanceChart() {
+
+
+    const excellent =
+        students.filter(
+            student =>
+                Number(student.score) >= 90
+        ).length;
+
+
+    const good =
+        students.filter(
+            student =>
+                Number(student.score) >= 80 &&
+                Number(student.score) < 90
+        ).length;
+
+
+    const average =
+        students.filter(
+            student =>
+                Number(student.score) >= 60 &&
+                Number(student.score) < 80
+        ).length;
+
+
+    const needs =
+        students.filter(
+            student =>
+                Number(student.score) < 60
+        ).length;
+
+
+    const canvas =
+        document.getElementById(
+            "performanceChart"
+        );
+
+
+    performanceChart =
+        new Chart(
+            canvas,
+            {
+
+                type: "doughnut",
+
+                data: {
+
+                    labels: [
+                        "Excellent",
+                        "Good",
+                        "Average",
+                        "Needs Improvement"
+                    ],
+
+                    datasets: [
+
+                        {
+
+                            data: [
+                                excellent,
+                                good,
+                                average,
+                                needs
+                            ]
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    cutout: "68%",
+
+                    plugins: {
+
+                        legend: {
+
+                            position: "bottom"
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   COURSE CHART
+===================================================== */
+
+let courseChart;
+
+
+function createCourseChart() {
+
+
+    const courses = {};
+
+
+    students.forEach(student => {
+
+        if (!courses[student.course]) {
+
+            courses[student.course] = [];
+
+        }
+
+
+        courses[student.course].push(
+            Number(student.score)
+        );
+
+    });
+
+
+    const labels =
+        Object.keys(courses);
+
+
+    const averages =
+        labels.map(course => {
+
+            const scores =
+                courses[course];
+
+
+            const total =
+                scores.reduce(
+                    (sum, score) =>
+                        sum + score,
+                    0
+                );
+
+
+            return Math.round(
+                total / scores.length
+            );
+
+        });
+
+
+    const canvas =
+        document.getElementById(
+            "courseChart"
+        );
+
+
+    courseChart =
+        new Chart(
+            canvas,
+            {
+
+                type: "bar",
+
+                data: {
+
+                    labels: labels,
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Average Score",
+
+                            data:
+                                averages
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true,
+
+                            max: 100
+
+                        }
+
+                    },
+
+                    plugins: {
+
+                        legend: {
+
+                            display: false
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   TOP PERFORMERS
+===================================================== */
+
+function renderTopPerformers() {
+
+
+    const container =
+        document.getElementById(
+            "topPerformers"
+        );
+
+
+    const sorted =
+        [...students]
+            .sort(
+                (a, b) =>
+                    Number(b.score) -
+                    Number(a.score)
+            )
+            .slice(0, 3);
+
+
+    container.innerHTML = "";
+
+
+    if (sorted.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="no-performance">
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                <p>
+                    No students available
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    sorted.forEach(
+        (student, index) => {
+
+            container.innerHTML += `
+
+                <div
+                    class="top-student">
+
+                    <div
+                        class="rank">
+
+                        ${index + 1}
+
+                    </div>
+
+
+                    <div
+                        class="top-avatar">
+
+                        ${getInitials(
+                            student.name
+                        )}
+
+                    </div>
+
+
+                    <div
+                        class="top-student-info">
+
+                        <h3>
+                            ${student.name}
+                        </h3>
+
+                        <p>
+                            ${student.course}
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="top-score">
+
+                        <strong>
+                            ${student.score}%
+                        </strong>
+
+                        <span>
+                            ${getPerformance(
+                                student.score
+                            )}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PERFORMANCE TABLE
+===================================================== */
+
+function renderPerformanceTable(
+    filter = "all"
+) {
+
+
+    const tbody =
+        document.getElementById(
+            "performanceTableBody"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    let filtered =
+        [...students];
+
+
+    if (filter !== "all") {
+
+        filtered =
+            filtered.filter(
+                student => {
+
+                    const performance =
+                        getPerformanceClass(
+                            student.score
+                        );
+
+
+                    return (
+                        performance ===
+                        filter
+                    );
+
+                }
+            );
+
+    }
+
+
+    filtered
+        .sort(
+            (a, b) =>
+                Number(b.score) -
+                Number(a.score)
+        )
+        .forEach(student => {
+
+
+            const performance =
+                getPerformance(
+                    student.score
+                );
+
+
+            const performanceClass =
+                getPerformanceClass(
+                    student.score
+                );
+
+
+            tbody.innerHTML += `
+
+                <tr>
+
+                    <td>
+
+                        <div
+                            class="performance-student">
+
+                            <div
+                                class="performance-avatar">
+
+                                ${getInitials(
+                                    student.name
+                                )}
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    ${student.name}
+                                </strong>
+
+                                <small>
+                                    ${student.email}
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        ${student.course}
+                    </td>
+
+
+                    <td>
+
+                        <strong
+                            class="score-number">
+
+                            ${student.score}%
+
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="performance-badge
+                            ${performanceClass}">
+
+                            ${performance}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div
+                            class="table-progress">
+
+                            <span
+                                style="width:
+                                ${student.score}%">
+
+                            </span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        });
+
+}
+
+
+/* =====================================================
+   FILTER TABLE
+===================================================== */
+
+function filterPerformanceTable() {
+
+    const filter =
+        document.getElementById(
+            "performanceFilter"
+        ).value;
+
+
+    renderPerformanceTable(
+        filter
+    );
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        updatePerformanceSummary();
+
+        createPerformanceChart();
+
+        createCourseChart();
+
+        renderTopPerformers();
+
+        renderPerformanceTable();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

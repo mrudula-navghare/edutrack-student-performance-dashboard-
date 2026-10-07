@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>EduTrack</span>
+        </div>
+
+        <div class="admin-profile">
+            <div class="profile-icon">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+
+            <div>
+                <h3>Admin</h3>
+                <p>Administrator</p>
+            </div>
+        </div>
+
+        <nav>
+
+            <a href="students.html">
+                <i class="fa-solid fa-chart-pie"></i>
+                Dashboard
+            </a>
+
+            <a href="students.html">
+                <i class="fa-solid fa-user-graduate"></i>
+                Students
+            </a>
+
+            <a href="students.html">
+
+                <i class="fa-solid fa-book"></i>
+                Subjects
+            </a>
+
+            <a href="students.html">
+                <i class="fa-solid fa-chart-line"></i>
+                Performance
+            </a>
+
+            <a href="students.html">
+                <i class="fa-solid fa-file-lines"></i>
+                Reports
+            </a>
+<a href="students.html">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="logout">
+            <a href="login.html">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+                <h1>Admin Dashboard</h1>
+                <p>Welcome back, Admin 👋</p>
+            </div>
+
+            <div class="top-actions">
+
+                <button class="icon-btn">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification">3</span>
+                </button>
+
+                <div class="admin-mini">
+                    <div class="mini-avatar">
+                        A
+                    </div>
+
+                    <span>Admin</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= STAT CARDS ================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card students">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+
+                <div>
+                    <p>Total Students</p>
+                    <h2>1,250</h2>
+                    <span class="increase">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        12.5% this month
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card teachers">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+
+                <div>
+                    <p>Total Teachers</p>
+                    <h2>85</h2>
+                    <span class="increase">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        5.2% this month
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card performance">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <div>
+                    <p>Avg Performance</p>
+                    <h2>82%</h2>
+                    <span class="increase">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        8.4% improvement
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card attendance">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+
+                <div>
+                    <p>Attendance</p>
+                    <h2>94%</h2>
+                    <span class="increase">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        3.1% this month
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CHART SECTION ================= -->
+
+        <section class="charts-grid">
+
+            <div class="chart-card large-chart">
+
+                <div class="chart-header">
+                    <div>
+                        <h2>Student Performance</h2>
+                        <p>Monthly performance overview</p>
+                    </div>
+
+                    <select id="performanceFilter">
+                        <option>2026</option>
+                        <option>2025</option>
+                        <option>2024</option>
+                    </select>
+                </div>
+
+                <canvas id="performanceChart"></canvas>
+
+            </div>
+
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+                    <div>
+                        <h2>Performance by Subject</h2>
+                        <p>Average marks</p>
+                    </div>
+                </div>
+
+                <canvas id="subjectChart"></canvas>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= BOTTOM SECTION ================= -->
+
+        <section class="bottom-grid">
+
+            <!-- Recent Students -->
+
+            <div class="table-card">
+
+                <div class="section-title">
+
+                    <div>
+                        <h2>Recent Students</h2>
+                        <p>Recently added students</p>
+                    </div>
+
+                    <button class="view-btn">
+                        View All
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Course</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="student-avatar">AS</div>
+                                        <span>Akash Sharma</span>
+                                    </div>
+                                </td>
+
+                                <td>MCA</td>
+
+                                <td>92%</td>
+
+                                <td>
+                                    <span class="status excellent">
+                                        Excellent
+                                    </span>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="student-avatar">PR</div>
+                                        <span>Priya Raj</span>
+                                    </div>
+                                </td>
+
+                                <td>MCA</td>
+
+                                <td>86%</td>
+
+                                <td>
+                                    <span class="status good">
+                                        Good
+                                    </span>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="student-avatar">RK</div>
+                                        <span>Rahul Kumar</span>
+                                    </div>
+                                </td>
+
+                                <td>MCA</td>
+
+                                <td>74%</td>
+
+                                <td>
+                                    <span class="status average">
+                                        Average
+                                    </span>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <div class="student-info">
+                                        <div class="student-avatar">SN</div>
+                                        <span> Sneha N</span>
+                                    </div>
+                                </td>
+
+                                <td>MCA</td>
+
+                                <td>95%</td>
+
+                                <td>
+                                    <span class="status excellent">
+                                        Excellent
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- Quick Actions -->
+
+            <div class="quick-card">
+
+                <div class="section-title">
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Manage dashboard</p>
+                    </div>
+                </div>
+
+
+                <button class="quick-action">
+                    <span class="action-icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </span>
+
+                    <span>
+                        <strong>Add Student</strong>
+                        <small>Create new student</small>
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+
+                <button class="quick-action">
+                    <span class="action-icon">
+                        <i class="fa-solid fa-file-export"></i>
+                    </span>
+
+                    <span>
+                        <strong>Generate Report</strong>
+                        <small>Create performance report</small>
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+
+                <button class="quick-action">
+                    <span class="action-icon">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </span>
+
+                    <span>
+                        <strong>View Analytics</strong>
+                        <small>Check student analytics</small>
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+
+                <button class="quick-action">
+                    <span class="action-icon">
+                        <i class="fa-solid fa-gear"></i>
+                    </span>
+
+                    <span>
+                        <strong>Settings</strong>
+                        <small>Manage system</small>
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+const performanceCtx =
+document.getElementById('performanceChart');
+
+new Chart(performanceCtx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep'
+        ],
+
+        datasets: [{
+
+            label: 'Average Performance',
+
+            data: [
+                65,
+                70,
+                68,
+                75,
+                78,
+                74,
+                82,
+                85,
+                88
+            ],
+
+            tension: 0.4,
+
+            fill: true,
+
+            borderWidth: 3
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+                display: false
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                max: 100
+
+            }
+
+        }
+
+    }
+
+});
+
+
+const subjectCtx =
+document.getElementById('subjectChart');
+
+new Chart(subjectCtx, {
+
+    type: 'doughnut',
+
+    data: {
+
+        labels: [
+            'Java',
+            'Python',
+            'DBMS',
+            'Web',
+            'Other'
+        ],
+
+        datasets: [{
+
+            data: [
+                82,
+                88,
+                76,
+                91,
+                70
+            ],
+
+            borderWidth: 2
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                position: 'bottom'
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

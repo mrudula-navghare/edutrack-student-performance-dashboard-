@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduTrack | Admin Login</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+
+    <div class="login-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="login-left">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div>
+                    <h2>EduTrack</h2>
+                    <span>Student Performance System</span>
+                </div>
+
+            </div>
+
+
+            <div class="hero-content">
+
+                <span class="welcome-badge">
+                    <i class="fa-solid fa-sparkles"></i>
+                    Welcome Back
+                </span>
+
+                <h1>
+                    Manage Student
+                    <span>Performance</span>
+                    Smarter.
+                </h1>
+
+                <p>
+                    Track academic performance, attendance,
+                    student progress and generate detailed
+                    reports from one powerful dashboard.
+                </p>
+
+
+                <div class="feature-list">
+
+                    <div class="feature">
+
+                        <div class="feature-icon purple">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <div>
+                            <strong>Performance Analytics</strong>
+                            <small>
+                                Monitor student progress with
+                                interactive analytics.
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon blue">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div>
+                            <strong>Student Management</strong>
+                            <small>
+                                Manage students and academic
+                                information easily.
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon pink">
+                            <i class="fa-solid fa-file-chart-column"></i>
+                        </div>
+
+                        <div>
+                            <strong>Smart Reports</strong>
+                            <small>
+                                Generate professional performance
+                                reports instantly.
+                            </small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="login-footer">
+                © 2026 EduTrack. Student Performance Management System.
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="login-right">
+
+            <div class="login-card">
+
+                <div class="mobile-brand">
+
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <h2>EduTrack</h2>
+
+                </div>
+
+
+                <div class="login-heading">
+
+                    <span class="small-title">
+                        ADMIN PORTAL
+                    </span>
+
+                    <h1>Welcome back 👋</h1>
+
+                    <p>
+                        Sign in to access your admin dashboard.
+                    </p>
+
+                </div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form id="loginForm">
+
+                    <div class="input-group">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="admin@edutrack.com"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword()">
+
+                                <i
+                                    class="fa-regular fa-eye"
+                                    id="eyeIcon">
+                                </i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="login-options">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="remember">
+
+                            <span>
+                                Remember me
+                            </span>
+
+                        </label>
+
+                        <a href="settings.html">
+                            Forgot Password?
+                        </a>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="login-btn">
+
+                        <span>
+                            Login to Dashboard
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <div
+                        class="demo-login">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <div>
+
+                            <strong>
+                                Demo Login
+                            </strong>
+
+                            <p>
+                                admin@edutrack.com
+                                &nbsp; / &nbsp;
+                                1234
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+
+                <div class="secure-login">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Secure Admin Access
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOGIN JAVASCRIPT -->
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const eye =
+                document.getElementById("eyeIcon");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                eye.classList.remove("fa-eye");
+
+                eye.classList.add("fa-eye-slash");
+
+            } else {
+
+                password.type = "password";
+
+                eye.classList.remove("fa-eye-slash");
+
+                eye.classList.add("fa-eye");
+
+            }
+
+        }
+
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    document.getElementById("email").value;
+
+                const password =
+                    document.getElementById("password").value;
+
+
+                if (
+                    email === "admin@edutrack.com"
+                    &&
+                    password === "1234"
+                ) {
+
+                    window.location.href =
+                        "admin.html";
+
+                } else {
+
+                    alert(
+                        "Invalid email or password.\n\n" +
+                        "Demo Login:\n" +
+                        "admin@edutrack.com\n" +
+                        "1234"
+                    );
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>

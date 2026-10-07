@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Students Management | EduTrack</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>EduTrack</span>
+        </div>
+
+        <div class="admin-profile">
+
+            <div class="profile-icon">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+
+            <div>
+                <h3>Admin</h3>
+                <p>Administrator</p>
+            </div>
+
+        </div>
+
+        <nav>
+
+            <a href="admin.html">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="students.html" class="active">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span>Students</span>
+            </a>
+
+            <a href="settings.html">
+                <i class="fa-solid fa-book"></i>
+                <span>Subjects</span>
+            </a>
+
+            <a href="performance.html">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Performance</span>
+            </a>
+
+            <a href="reports.html">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+        <div class="logout">
+
+            <a href="login.html">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+                <h1>Students</h1>
+                <p>Manage and monitor student information</p>
+            </div>
+
+            <div class="top-actions">
+
+                <button class="icon-btn">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification">3</span>
+                </button>
+
+                <div class="admin-mini">
+
+                    <div class="mini-avatar">
+                        A
+                    </div>
+
+                    <span>Admin</span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card students">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+                    <p>Total Students</p>
+                    <h2 id="totalStudents">0</h2>
+                    <span class="increase">Registered students</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card performance">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+
+                <div>
+                    <p>Active Students</p>
+                    <h2 id="activeStudents">0</h2>
+                    <span class="increase" id="activePercentage">
+                        0% active
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card teachers">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+
+                <div>
+                    <p>New Students</p>
+                    <h2 id="newStudents">0</h2>
+                    <span class="increase">Added this session</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card attendance">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div>
+                    <p>Top Performers</p>
+                    <h2 id="topPerformers">0</h2>
+                    <span class="increase">Score 90%+</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STUDENT TABLE ================= -->
+
+        <div class="table-card">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>Student List</h2>
+                    <p>View and manage all students</p>
+                </div>
+
+                <button
+                    class="view-btn"
+                    onclick="openStudentForm()">
+
+                    <i class="fa-solid fa-plus"></i>
+                    Add Student
+
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH / FILTER -->
+
+            <div class="student-controls">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="studentSearch"
+                        placeholder="Search name, email or ID..."
+                        oninput="applyFilters()">
+
+                </div>
+
+
+                <select
+                    id="courseFilter"
+                    onchange="applyFilters()">
+
+                    <option value="all">All Courses</option>
+                    <option value="MCA">MCA</option>
+                    <option value="MBA">MBA</option>
+                    <option value="BCA">BCA</option>
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="M.Tech">M.Tech</option>
+
+                </select>
+
+
+                <select
+                    id="statusFilter"
+                    onchange="applyFilters()">
+
+                    <option value="all">All Status</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+
+                </select>
+
+
+                <select
+                    id="performanceFilter"
+                    onchange="applyFilters()">
+
+                    <option value="all">All Performance</option>
+                    <option value="Excellent">Excellent</option>
+                    <option value="Good">Good</option>
+                    <option value="Average">Average</option>
+                    <option value="Needs Improvement">
+                        Needs Improvement
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-container">
+
+                <table id="studentTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Email</th>
+                            <th>Score</th>
+                            <th>Performance</th>
+                            <th>Status</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="studentTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     ADD / EDIT STUDENT MODAL
+===================================================== -->
+
+<div class="modal" id="studentModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="modalTitle">
+                    Add New Student
+                </h2>
+
+                <p>Enter student information</p>
+
+            </div>
+
+            <button
+                type="button"
+                onclick="closeStudentForm()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Student Name</label>
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Enter student name">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="studentEmail"
+                placeholder="student@email.com">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Phone Number</label>
+
+            <input
+                type="tel"
+                id="studentPhone"
+                placeholder="Enter phone number">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Course</label>
+
+            <select id="studentCourse">
+
+                <option value="MCA">MCA</option>
+                <option value="MBA">MBA</option>
+                <option value="BCA">BCA</option>
+                <option value="B.Tech">B.Tech</option>
+                <option value="M.Tech">M.Tech</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Performance Score</label>
+
+            <input
+                type="number"
+                id="studentScore"
+                min="0"
+                max="100"
+                placeholder="Enter score 0-100">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Student Status</label>
+
+            <select id="studentStatus">
+
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="save-btn"
+            id="saveButton"
+            onclick="saveStudent()">
+
+            <i class="fa-solid fa-check"></i>
+            Save Student
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     VIEW STUDENT MODAL
+===================================================== -->
+
+<div class="modal" id="viewModal">
+
+    <div class="profile-modal">
+
+        <!-- HEADER -->
+
+        <div class="profile-modal-header">
+
+            <div>
+
+                <span class="profile-label">
+                    STUDENT PROFILE
+                </span>
+
+                <h2>Student Details</h2>
+
+            </div>
+
+            <button
+                class="profile-close"
+                onclick="closeViewModal()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <div class="profile-top">
+
+            <div
+                class="profile-big-avatar"
+                id="viewAvatar">
+
+                AS
+
+            </div>
+
+
+            <div class="profile-main-info">
+
+                <h2 id="viewName">
+                    Student Name
+                </h2>
+
+                <p id="viewEmail">
+                    email@example.com
+                </p>
+
+                <div class="profile-tags">
+
+                    <span id="viewCourseTag">
+                        MCA
+                    </span>
+
+                    <span id="viewStatusTag">
+                        Active
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK STATS -->
+
+        <div class="profile-stats">
+
+            <div class="profile-stat">
+
+                <i class="fa-solid fa-id-card"></i>
+
+                <span>Student ID</span>
+
+                <strong id="viewId">
+                    ST001
+                </strong>
+
+            </div>
+
+
+            <div class="profile-stat">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <span>Phone</span>
+
+                <strong id="viewPhone">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="profile-stat">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>Score</span>
+
+                <strong id="viewScore">
+                    92%
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- PERFORMANCE -->
+
+        <div class="profile-section">
+
+            <div class="profile-section-title">
+
+                <div>
+
+                    <h3>Academic Performance</h3>
+
+                    <p>
+                        Overall student performance
+                    </p>
+
+                </div>
+
+                <strong id="viewPerformance">
+                    Excellent
+                </strong>
+
+            </div>
+
+
+            <div class="progress-container">
+
+                <div
+                    class="progress-bar"
+                    id="viewProgressBar">
+
+                    <span></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUBJECTS -->
+
+        <div class="profile-section">
+
+            <div class="profile-section-title">
+
+                <div>
+
+                    <h3>Subject Performance</h3>
+
+                    <p>
+                        Current academic scores
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="subject-list">
+
+                <div class="subject-item">
+
+                    <div>
+
+                        <span>Data Structures</span>
+
+                        <div class="subject-progress">
+                            <span style="width:92%"></span>
+                        </div>
+
+                    </div>
+
+                    <strong>92%</strong>
+
+                </div>
+
+
+                <div class="subject-item">
+
+                    <div>
+
+                        <span>Database Management</span>
+
+                        <div class="subject-progress">
+                            <span style="width:88%"></span>
+                        </div>
+
+                    </div>
+
+                    <strong>88%</strong>
+
+                </div>
+
+
+                <div class="subject-item">
+
+                    <div>
+
+                        <span>Computer Networks</span>
+
+                        <div class="subject-progress">
+                            <span style="width:84%"></span>
+                        </div>
+
+                    </div>
+
+                    <strong>84%</strong>
+
+                </div>
+
+
+                <div class="subject-item">
+
+                    <div>
+
+                        <span>Web Development</span>
+
+                        <div class="subject-progress">
+                            <span style="width:95%"></span>
+                        </div>
+
+                    </div>
+
+                    <strong>95%</strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ATTENDANCE -->
+
+        <div class="profile-section">
+
+            <div class="profile-section-title">
+
+                <div>
+
+                    <h3>Attendance</h3>
+
+                    <p>
+                        Current semester attendance
+                    </p>
+
+                </div>
+
+                <strong>92%</strong>
+
+            </div>
+
+
+            <div class="attendance-progress">
+
+                <span style="width:92%"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+let students = JSON.parse(
+    localStorage.getItem("eduTrackStudents")
+) || [];
+
+let editingStudentId = null;
+
+
+/* =====================================================
+   DEFAULT DATA
+===================================================== */
+
+if (students.length === 0) {
+
+    students = [
+
+        {
+            id: "ST001",
+            name: "Akash Sharma",
+            email: "akash@gmail.com",
+            phone: "9876543210",
+            course: "MCA",
+            score: 92,
+            status: "Active"
+        },
+
+        {
+            id: "ST002",
+            name: "Priya Raj",
+            email: "priya@gmail.com",
+            phone: "9876543211",
+            course: "MCA",
+            score: 86,
+            status: "Active"
+        },
+
+        {
+            id: "ST003",
+            name: "Rahul Kumar",
+            email: "rahul@gmail.com",
+            phone: "9876543212",
+            course: "MBA",
+            score: 74,
+            status: "Active"
+        },
+
+        {
+            id: "ST004",
+            name: "Sneha N",
+            email: "sneha@gmail.com",
+            phone: "9876543213",
+            course: "BCA",
+            score: 95,
+            status: "Active"
+        }
+
+    ];
+
+    saveStudents();
+
+}
+
+
+/* =====================================================
+   SAVE DATA
+===================================================== */
+
+function saveStudents() {
+
+    localStorage.setItem(
+        "eduTrackStudents",
+        JSON.stringify(students)
+    );
+
+}
+
+
+/* =====================================================
+   PERFORMANCE
+===================================================== */
+
+function getPerformance(score) {
+
+    score = Number(score);
+
+    if (score >= 90) {
+        return "Excellent";
+    }
+
+    if (score >= 80) {
+        return "Good";
+    }
+
+    if (score >= 60) {
+        return "Average";
+    }
+
+    return "Needs Improvement";
+
+}
+
+
+function getPerformanceClass(score) {
+
+    score = Number(score);
+
+    if (score >= 90) {
+        return "excellent";
+    }
+
+    if (score >= 80) {
+        return "good";
+    }
+
+    if (score >= 60) {
+        return "average";
+    }
+
+    return "needs-improvement";
+
+}
+
+
+/* =====================================================
+   INITIALS
+===================================================== */
+
+function getInitials(name) {
+
+    const words =
+        name.trim().split(/\s+/);
+
+    if (words.length >= 2) {
+
+        return (
+            words[0][0] +
+            words[words.length - 1][0]
+        ).toUpperCase();
+
+    }
+
+    return name
+        .substring(0, 2)
+        .toUpperCase();
+
+}
+
+
+/* =====================================================
+   RENDER STUDENTS
+===================================================== */
+
+function renderStudents() {
+
+    const tbody =
+        document.getElementById(
+            "studentTableBody"
+        );
+
+    tbody.innerHTML = "";
+
+
+    students.forEach(student => {
+
+        const performance =
+            getPerformance(student.score);
+
+        const performanceClass =
+            getPerformanceClass(student.score);
+
+
+        const row =
+            document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>${student.id}</td>
+
+            <td>
+
+                <div class="student-info">
+
+                    <div class="student-avatar">
+                        ${getInitials(student.name)}
+                    </div>
+
+                    <span>
+                        ${student.name}
+                    </span>
+
+                </div>
+
+            </td>
+
+            <td>${student.course}</td>
+
+            <td>${student.email}</td>
+
+            <td>
+                <strong>${student.score}%</strong>
+            </td>
+
+            <td>
+
+                <span class="status ${performanceClass}">
+                    ${performance}
+                </span>
+
+            </td>
+
+            <td>
+
+                <span class="status ${
+                    student.status === "Active"
+                        ? "active"
+                        : "inactive"
+                }">
+                    ${student.status}
+                </span>
+
+            </td>
+
+            <td>
+
+                <button
+                    class="action-btn view"
+                    onclick="viewStudent('${student.id}')"
+                    title="View">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </button>
+
+                <button
+                    class="action-btn edit"
+                    onclick="editStudent('${student.id}')"
+                    title="Edit">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </button>
+
+                <button
+                    class="action-btn delete"
+                    onclick="deleteStudent('${student.id}')"
+                    title="Delete">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </td>
+
+        `;
+
+
+        tbody.appendChild(row);
+
+    });
+
+
+    updateStatistics();
+
+    applyFilters();
+
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+function updateStatistics() {
+
+    const total =
+        students.length;
+
+
+    const active =
+        students.filter(
+            student =>
+                student.status === "Active"
+        ).length;
+
+
+    const top =
+        students.filter(
+            student =>
+                Number(student.score) >= 90
+        ).length;
+
+
+    document.getElementById(
+        "totalStudents"
+    ).innerText = total;
+
+
+    document.getElementById(
+        "activeStudents"
+    ).innerText = active;
+
+
+    document.getElementById(
+        "topPerformers"
+    ).innerText = top;
+
+
+    const percentage =
+        total > 0
+            ? ((active / total) * 100).toFixed(1)
+            : 0;
+
+
+    document.getElementById(
+        "activePercentage"
+    ).innerText =
+        percentage + "% active";
+
+
+    /*
+       For now this shows the number of students
+       currently stored.
+    */
+
+    document.getElementById(
+        "newStudents"
+    ).innerText = students.length;
+
+}
+
+
+/* =====================================================
+   OPEN ADD FORM
+===================================================== */
+
+function openStudentForm() {
+
+    editingStudentId = null;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).innerText =
+        "Add New Student";
+
+
+    document.getElementById(
+        "saveButton"
+    ).innerHTML =
+        '<i class="fa-solid fa-check"></i> Save Student';
+
+
+    document.getElementById(
+        "studentName"
+    ).value = "";
+
+
+    document.getElementById(
+        "studentEmail"
+    ).value = "";
+
+
+    document.getElementById(
+        "studentPhone"
+    ).value = "";
+
+
+    document.getElementById(
+        "studentCourse"
+    ).value = "MCA";
+
+
+    document.getElementById(
+        "studentScore"
+    ).value = "";
+
+
+    document.getElementById(
+        "studentStatus"
+    ).value = "Active";
+
+
+    document.getElementById(
+        "studentModal"
+    ).style.display = "flex";
+
+}
+
+
+/* =====================================================
+   CLOSE FORM
+===================================================== */
+
+function closeStudentForm() {
+
+    document.getElementById(
+        "studentModal"
+    ).style.display = "none";
+
+}
+
+
+/* =====================================================
+   SAVE STUDENT
+===================================================== */
+
+function saveStudent() {
+
+    const name =
+        document.getElementById(
+            "studentName"
+        ).value.trim();
+
+
+    const email =
+        document.getElementById(
+            "studentEmail"
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            "studentPhone"
+        ).value.trim();
+
+
+    const course =
+        document.getElementById(
+            "studentCourse"
+        ).value;
+
+
+    const score =
+        Number(
+            document.getElementById(
+                "studentScore"
+            ).value
+        );
+
+
+    const status =
+        document.getElementById(
+            "studentStatus"
+        ).value;
+
+
+    /* VALIDATION */
+
+    if (
+        name === "" ||
+        email === "" ||
+        phone === "" ||
+        isNaN(score)
+    ) {
+
+        alert(
+            "Please fill all fields."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        score < 0 ||
+        score > 100
+    ) {
+
+        alert(
+            "Score must be between 0 and 100."
+        );
+
+        return;
+
+    }
+
+
+    /* =================================================
+       UPDATE EXISTING
+    ================================================= */
+
+    if (editingStudentId !== null) {
+
+        const student =
+            students.find(
+                item =>
+                    item.id ===
+                    editingStudentId
+            );
+
+
+        if (student) {
+
+            student.name = name;
+            student.email = email;
+            student.phone = phone;
+            student.course = course;
+            student.score = score;
+            student.status = status;
+
+        }
+
+
+        saveStudents();
+
+        renderStudents();
+
+        closeStudentForm();
+
+        alert(
+            "Student updated successfully!"
+        );
+
+        return;
+
+    }
+
+
+    /* =================================================
+       NEW ID
+    ================================================= */
+
+    let maxId = 0;
+
+
+    students.forEach(student => {
+
+        const number =
+            parseInt(
+                student.id.replace("ST", "")
+            );
+
+
+        if (!isNaN(number)) {
+
+            maxId =
+                Math.max(maxId, number);
+
+        }
+
+    });
+
+
+    const newId =
+        "ST" +
+        String(maxId + 1)
+            .padStart(3, "0");
+
+
+    /* =================================================
+       NEW STUDENT
+    ================================================= */
+
+    const newStudent = {
+
+        id: newId,
+
+        name: name,
+
+        email: email,
+
+        phone: phone,
+
+        course: course,
+
+        score: score,
+
+        status: status
+
+    };
+
+
+    students.push(newStudent);
+
+
+    saveStudents();
+
+    renderStudents();
+
+    closeStudentForm();
+
+
+    alert(
+        "Student added successfully!"
+    );
+
+}
+
+
+/* =====================================================
+   EDIT STUDENT
+===================================================== */
+
+function editStudent(id) {
+
+    const student =
+        students.find(
+            item =>
+                item.id === id
+        );
+
+
+    if (!student) {
+        return;
+    }
+
+
+    editingStudentId = id;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).innerText =
+        "Edit Student";
+
+
+    document.getElementById(
+        "saveButton"
+    ).innerHTML =
+        '<i class="fa-solid fa-pen"></i> Update Student';
+
+
+    document.getElementById(
+        "studentName"
+    ).value =
+        student.name;
+
+
+    document.getElementById(
+        "studentEmail"
+    ).value =
+        student.email;
+
+
+    document.getElementById(
+        "studentPhone"
+    ).value =
+        student.phone;
+
+
+    document.getElementById(
+        "studentCourse"
+    ).value =
+        student.course;
+
+
+    document.getElementById(
+        "studentScore"
+    ).value =
+        student.score;
+
+
+    document.getElementById(
+        "studentStatus"
+    ).value =
+        student.status;
+
+
+    document.getElementById(
+        "studentModal"
+    ).style.display =
+        "flex";
+
+}
+
+
+/* =====================================================
+   DELETE
+===================================================== */
+
+function deleteStudent(id) {
+
+    const student =
+        students.find(
+            item =>
+                item.id === id
+        );
+
+
+    if (!student) {
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete " +
+            student.name +
+            "?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    students =
+        students.filter(
+            item =>
+                item.id !== id
+        );
+
+
+    saveStudents();
+
+    renderStudents();
+
+
+    alert(
+        "Student deleted successfully!"
+    );
+
+}
+
+
+/* =====================================================
+   VIEW STUDENT
+===================================================== */
+
+function viewStudent(id) {
+
+    const student =
+        students.find(
+            item =>
+                item.id === id
+        );
+
+
+    if (!student) {
+        return;
+    }
+
+
+    const performance =
+        getPerformance(
+            student.score
+        );
+
+
+    document.getElementById(
+        "viewAvatar"
+    ).innerText =
+        getInitials(student.name);
+
+
+    document.getElementById(
+        "viewName"
+    ).innerText =
+        student.name;
+
+
+    document.getElementById(
+        "viewEmail"
+    ).innerText =
+        student.email;
+
+
+    document.getElementById(
+        "viewId"
+    ).innerText =
+        student.id;
+
+
+    document.getElementById(
+        "viewPhone"
+    ).innerText =
+        student.phone;
+
+
+    document.getElementById(
+        "viewScore"
+    ).innerText =
+        student.score + "%";
+
+
+    document.getElementById(
+        "viewCourseTag"
+    ).innerText =
+        student.course;
+
+
+    document.getElementById(
+        "viewStatusTag"
+    ).innerText =
+        student.status;
+
+
+    document.getElementById(
+        "viewPerformance"
+    ).innerText =
+        performance;
+
+
+    const progress =
+        document.querySelector(
+            "#viewProgressBar span"
+        );
+
+
+    if (progress) {
+
+        progress.style.width =
+            student.score + "%";
+
+    }
+
+
+    document.getElementById(
+        "viewModal"
+    ).style.display =
+        "flex";
+
+}
+
+
+/* =====================================================
+   CLOSE VIEW
+===================================================== */
+
+function closeViewModal() {
+
+    document.getElementById(
+        "viewModal"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   FILTERS
+===================================================== */
+
+function applyFilters() {
+
+    const search =
+        document.getElementById(
+            "studentSearch"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    const course =
+        document.getElementById(
+            "courseFilter"
+        ).value;
+
+
+    const status =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+
+    const performance =
+        document.getElementById(
+            "performanceFilter"
+        ).value;
+
+
+    const rows =
+        document.querySelectorAll(
+            "#studentTableBody tr"
+        );
+
+
+    rows.forEach(row => {
+
+        const id =
+            row.cells[0]
+                .innerText
+                .toLowerCase();
+
+
+        const name =
+            row.cells[1]
+                .innerText
+                .toLowerCase();
+
+
+        const studentCourse =
+            row.cells[2]
+                .innerText
+                .trim();
+
+
+        const email =
+            row.cells[3]
+                .innerText
+                .toLowerCase();
+
+
+        const studentPerformance =
+            row.cells[5]
+                .innerText
+                .trim();
+
+
+        const studentStatus =
+            row.cells[6]
+                .innerText
+                .trim();
+
+
+        const searchMatch =
+            search === "" ||
+            id.includes(search) ||
+            name.includes(search) ||
+            email.includes(search);
+
+
+        const courseMatch =
+            course === "all" ||
+            studentCourse === course;
+
+
+        const statusMatch =
+            status === "all" ||
+            studentStatus === status;
+
+
+        const performanceMatch =
+            performance === "all" ||
+            studentPerformance === performance;
+
+
+        if (
+            searchMatch &&
+            courseMatch &&
+            statusMatch &&
+            performanceMatch
+        ) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   CLOSE WHEN CLICKING OUTSIDE
+===================================================== */
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        const studentModal =
+            document.getElementById(
+                "studentModal"
+            );
+
+
+        const viewModal =
+            document.getElementById(
+                "viewModal"
+            );
+
+
+        if (
+            event.target ===
+            studentModal
+        ) {
+
+            closeStudentForm();
+
+        }
+
+
+        if (
+            event.target ===
+            viewModal
+        ) {
+
+            closeViewModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ESCAPE KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeStudentForm();
+
+            closeViewModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        renderStudents();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
