@@ -1,17 +1,1283 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EduTrack Login</title>
+    <title>EduTrack | Admin Dashboard</title>
 
-    <meta http-equiv="refresh" content="0; url=login.html">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <p>Opening Login Page...</p>
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>EduTrack</span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="admin.html" class="nav-link active">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="students.html" class="nav-link">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span>Students</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-book"></i>
+                <span>Subjects</span>
+            </a>
+
+            <a href="performance.html" class="nav-link">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Performance</span>
+            </a>
+
+            <a href="reports.html" class="nav-link">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+            <a href="login.html" class="nav-link logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome back, Admin 👋</p>
+            </div>
+
+            <div class="topbar-right">
+
+                <button class="notification-btn" title="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                    <span>3</span>
+                </button>
+
+                <div class="admin-profile">
+
+                    <div class="avatar">
+                        A
+                    </div>
+
+                    <div>
+                        <strong>Admin</strong>
+                        <small>Administrator</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD CONTENT ================= -->
+
+        <section class="dashboard-content">
+
+
+            <!-- ================= STAT CARDS ================= -->
+
+            <div class="stats-grid">
+
+
+                <!-- TOTAL STUDENTS -->
+
+                <div class="stat-card students">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>Total Students</span>
+
+                        <h2 id="totalStudents">
+                            0
+                        </h2>
+
+                        <small>
+                            <i class="fa-solid fa-users"></i>
+                            Registered students
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIVE STUDENTS -->
+
+                <div class="stat-card teachers">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>Active Students</span>
+
+                        <h2 id="activeStudents">
+                            0
+                        </h2>
+
+                        <small id="activePercentage">
+                            0% active
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AVERAGE PERFORMANCE -->
+
+                <div class="stat-card performance">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>Avg Performance</span>
+
+                        <h2 id="avgPerformance">
+                            0%
+                        </h2>
+
+                        <small>
+                            <i class="fa-solid fa-arrow-up"></i>
+                            Overall student score
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOP PERFORMERS -->
+
+                <div class="stat-card attendance">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>Top Performers</span>
+
+                        <h2 id="topPerformers">
+                            0
+                        </h2>
+
+                        <small>
+                            Score 90% or above
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= CHARTS ================= -->
+
+            <div class="charts-grid">
+
+
+                <!-- STUDENT PERFORMANCE CHART -->
+
+                <div class="chart-card">
+
+                    <div class="chart-header">
+
+                        <div>
+                            <h3>Student Performance</h3>
+
+                            <p>
+                                Current student scores
+                            </p>
+                        </div>
+
+                        <button
+                            class="refresh-chart"
+                            onclick="loadDashboardData()"
+                            title="Refresh Data">
+
+                            <i class="fa-solid fa-rotate"></i>
+
+                        </button>
+
+                    </div>
+
+                    <div class="chart-container">
+
+                        <canvas id="performanceChart"></canvas>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COURSE DISTRIBUTION -->
+
+                <div class="chart-card">
+
+                    <div class="chart-header">
+
+                        <div>
+
+                            <h3>Students by Course</h3>
+
+                            <p>
+                                Course-wise student distribution
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container">
+
+                        <canvas id="courseChart"></canvas>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= BOTTOM SECTION ================= -->
+
+            <div class="bottom-grid">
+
+
+                <!-- RECENT STUDENTS -->
+
+                <div class="table-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>Recent Students</h3>
+
+                            <p>
+                                Latest students added to EduTrack
+                            </p>
+
+                        </div>
+
+                        <a href="students.html" class="view-all">
+                            View All
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+
+                    <div class="table-responsive">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Student</th>
+
+                                    <th>ID</th>
+
+                                    <th>Course</th>
+
+                                    <th>Score</th>
+
+                                    <th>Performance</th>
+
+                                    <th>Status</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="recentStudentsTable">
+
+                                <tr>
+
+                                    <td colspan="6"
+                                        style="text-align:center;padding:30px;">
+
+                                        Loading students...
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="quick-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>Quick Actions</h3>
+
+                            <p>
+                                Manage your dashboard
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <a href="students.html" class="quick-action">
+
+                            <div class="quick-icon">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>Add Student</strong>
+
+                                <span>
+                                    Add a new student
+                                </span>
+
+                            </div>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </a>
+
+
+                        <a href="reports.html" class="quick-action">
+
+                            <div class="quick-icon">
+                                <i class="fa-solid fa-file-export"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>Generate Report</strong>
+
+                                <span>
+                                    View student reports
+                                </span>
+
+                            </div>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </a>
+
+
+                        <a href="performance.html" class="quick-action">
+
+                            <div class="quick-icon">
+                                <i class="fa-solid fa-chart-column"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>View Analytics</strong>
+
+                                <span>
+                                    Analyze performance
+                                </span>
+
+                            </div>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </a>
+
+
+                        <a href="settings.html" class="quick-action">
+
+                            <div class="quick-icon">
+                                <i class="fa-solid fa-gear"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>Settings</strong>
+
+                                <span>
+                                    Manage dashboard
+                                </span>
+
+                            </div>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= LAST UPDATED ================= -->
+
+            <div class="dashboard-footer">
+
+                <span>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Dashboard connected to student data
+                </span>
+
+                <span id="lastUpdated">
+                    Last updated: --
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* ==========================================
+           GLOBAL VARIABLES
+        ========================================== */
+
+        let performanceChart = null;
+        let courseChart = null;
+
+
+        /* ==========================================
+           GET STUDENTS FROM LOCAL STORAGE
+        ========================================== */
+
+        function getStudents() {
+
+            try {
+
+                const data =
+                    localStorage.getItem("eduTrackStudents");
+
+                if (!data) {
+                    return [];
+                }
+
+                const students = JSON.parse(data);
+
+                return Array.isArray(students)
+                    ? students
+                    : [];
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to load students:",
+                    error
+                );
+
+                return [];
+
+            }
+
+        }
+
+
+        /* ==========================================
+           PERFORMANCE CATEGORY
+        ========================================== */
+
+        function getPerformance(score) {
+
+            score = Number(score) || 0;
+
+            if (score >= 90) {
+                return "Excellent";
+            }
+
+            if (score >= 80) {
+                return "Good";
+            }
+
+            if (score >= 60) {
+                return "Average";
+            }
+
+            return "Needs Improvement";
+
+        }
+
+
+        /* ==========================================
+           PERFORMANCE CLASS
+        ========================================== */
+
+        function getPerformanceClass(score) {
+
+            score = Number(score) || 0;
+
+            if (score >= 90) {
+                return "excellent";
+            }
+
+            if (score >= 80) {
+                return "good";
+            }
+
+            if (score >= 60) {
+                return "average";
+            }
+
+            return "needs-improvement";
+
+        }
+
+
+        /* ==========================================
+           STATUS CLASS
+        ========================================== */
+
+        function getStatusClass(status) {
+
+            if (
+                String(status).toLowerCase()
+                === "active"
+            ) {
+
+                return "active";
+
+            }
+
+            return "inactive";
+
+        }
+
+
+        /* ==========================================
+           ESCAPE HTML
+        ========================================== */
+
+        function escapeHTML(value) {
+
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        /* ==========================================
+           UPDATE STATISTICS
+        ========================================== */
+
+        function updateStatistics(students) {
+
+            const total =
+                students.length;
+
+
+            const active =
+                students.filter(student =>
+                    String(student.status)
+                        .toLowerCase()
+                    === "active"
+                ).length;
+
+
+            const topPerformers =
+                students.filter(student =>
+                    Number(student.score) >= 90
+                ).length;
+
+
+            const totalScore =
+                students.reduce(
+                    (sum, student) =>
+                        sum + (Number(student.score) || 0),
+                    0
+                );
+
+
+            const average =
+                total > 0
+                    ? totalScore / total
+                    : 0;
+
+
+            const activePercentage =
+                total > 0
+                    ? (active / total) * 100
+                    : 0;
+
+
+            document.getElementById(
+                "totalStudents"
+            ).textContent = total;
+
+
+            document.getElementById(
+                "activeStudents"
+            ).textContent = active;
+
+
+            document.getElementById(
+                "avgPerformance"
+            ).textContent =
+                average.toFixed(1) + "%";
+
+
+            document.getElementById(
+                "topPerformers"
+            ).textContent =
+                topPerformers;
+
+
+            document.getElementById(
+                "activePercentage"
+            ).textContent =
+                activePercentage.toFixed(1)
+                + "% active";
+
+        }
+
+
+        /* ==========================================
+           RECENT STUDENTS TABLE
+        ========================================== */
+
+        function renderRecentStudents(students) {
+
+            const table =
+                document.getElementById(
+                    "recentStudentsTable"
+                );
+
+
+            if (students.length === 0) {
+
+                table.innerHTML = `
+
+                    <tr>
+
+                        <td colspan="6"
+                            style="
+                            text-align:center;
+                            padding:35px;
+                            ">
+
+                            <i
+                                class="fa-solid fa-user-graduate"
+                                style="
+                                font-size:30px;
+                                margin-bottom:10px;
+                                display:block;
+                                "
+                            ></i>
+
+                            No students found.
+
+                            <br>
+
+                            <a
+                                href="students.html"
+                                style="
+                                display:inline-block;
+                                margin-top:10px;
+                                "
+                            >
+                                Add your first student
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            /*
+                Latest 5 students.
+                reverse() means newest entries
+                appear first.
+            */
+
+            const recentStudents =
+                [...students]
+                    .reverse()
+                    .slice(0, 5);
+
+
+            table.innerHTML =
+                recentStudents.map(student => {
+
+                    const score =
+                        Number(student.score) || 0;
+
+
+                    const performance =
+                        student.performance
+                        || getPerformance(score);
+
+
+                    const status =
+                        student.status
+                        || "Active";
+
+
+                    const name =
+                        escapeHTML(
+                            student.name
+                            || "Unknown Student"
+                        );
+
+
+                    const id =
+                        escapeHTML(
+                            student.id
+                            || "N/A"
+                        );
+
+
+                    const course =
+                        escapeHTML(
+                            student.course
+                            || "N/A"
+                        );
+
+
+                    return `
+
+                        <tr>
+
+                            <td>
+
+                                <div
+                                    class="student-cell"
+                                >
+
+                                    <div
+                                        class="student-avatar"
+                                    >
+
+                                        ${escapeHTML(
+                                            name
+                                                .charAt(0)
+                                                .toUpperCase()
+                                        )}
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            ${name}
+                                        </strong>
+
+                                        <small>
+                                            ${escapeHTML(
+                                                student.email
+                                                || ""
+                                            )}
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                ${id}
+                            </td>
+
+
+                            <td>
+                                ${course}
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    ${score}%
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                <span
+                                    class="performance-badge ${getPerformanceClass(score)}"
+                                >
+                                    ${escapeHTML(
+                                        performance
+                                    )}
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span
+                                    class="status-badge ${getStatusClass(status)}"
+                                >
+
+                                    <span
+                                        class="status-dot"
+                                    ></span>
+
+                                    ${escapeHTML(
+                                        status
+                                    )}
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }).join("");
+
+        }
+
+
+        /* ==========================================
+           PERFORMANCE CHART
+        ========================================== */
+
+        function createPerformanceChart(students) {
+
+            const canvas =
+                document.getElementById(
+                    "performanceChart"
+                );
+
+
+            if (!canvas) {
+                return;
+            }
+
+
+            if (performanceChart) {
+
+                performanceChart.destroy();
+
+            }
+
+
+            /*
+                Display maximum 10 students
+                so the chart remains readable.
+            */
+
+            const chartStudents =
+                students.slice(-10);
+
+
+            const labels =
+                chartStudents.map(student =>
+                    String(
+                        student.name
+                        || "Student"
+                    ).split(" ")[0]
+                );
+
+
+            const scores =
+                chartStudents.map(student =>
+                    Number(student.score) || 0
+                );
+
+
+            performanceChart =
+                new Chart(
+                    canvas.getContext("2d"),
+                    {
+
+                        type: "bar",
+
+                        data: {
+
+                            labels: labels,
+
+                            datasets: [
+
+                                {
+
+                                    label:
+                                        "Performance (%)",
+
+                                    data: scores,
+
+                                    borderWidth: 2,
+
+                                    borderRadius: 8
+
+                                }
+
+                            ]
+
+                        },
+
+                        options: {
+
+                            responsive: true,
+
+                            maintainAspectRatio: false,
+
+                            scales: {
+
+                                y: {
+
+                                    beginAtZero: true,
+
+                                    max: 100,
+
+                                    ticks: {
+
+                                        callback:
+                                            function(value) {
+
+                                                return value
+                                                    + "%";
+
+                                            }
+
+                                    }
+
+                                }
+
+                            },
+
+                            plugins: {
+
+                                legend: {
+
+                                    display: false
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+        /* ==========================================
+           COURSE CHART
+        ========================================== */
+
+        function createCourseChart(students) {
+
+            const canvas =
+                document.getElementById(
+                    "courseChart"
+                );
+
+
+            if (!canvas) {
+                return;
+            }
+
+
+            if (courseChart) {
+
+                courseChart.destroy();
+
+            }
+
+
+            const courseCounts = {};
+
+
+            students.forEach(student => {
+
+                const course =
+                    student.course
+                    || "Other";
+
+
+                if (!courseCounts[course]) {
+
+                    courseCounts[course] = 0;
+
+                }
+
+
+                courseCounts[course]++;
+
+            });
+
+
+            const labels =
+                Object.keys(courseCounts);
+
+
+            const values =
+                Object.values(courseCounts);
+
+
+            /*
+                If there are no students,
+                show an empty chart.
+            */
+
+            if (labels.length === 0) {
+
+                labels.push("No Data");
+                values.push(1);
+
+            }
+
+
+            courseChart =
+                new Chart(
+                    canvas.getContext("2d"),
+                    {
+
+                        type: "doughnut",
+
+                        data: {
+
+                            labels: labels,
+
+                            datasets: [
+
+                                {
+
+                                    data: values,
+
+                                    borderWidth: 2
+
+                                }
+
+                            ]
+
+                        },
+
+                        options: {
+
+                            responsive: true,
+
+                            maintainAspectRatio: false,
+
+                            cutout: "65%",
+
+                            plugins: {
+
+                                legend: {
+
+                                    position: "bottom"
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+        /* ==========================================
+           UPDATE TIME
+        ========================================== */
+
+        function updateTime() {
+
+            const now =
+                new Date();
+
+
+            const formatted =
+                now.toLocaleString(
+                    "en-IN",
+                    {
+                        dateStyle: "medium",
+                        timeStyle: "short"
+                    }
+                );
+
+
+            document.getElementById(
+                "lastUpdated"
+            ).textContent =
+                "Last updated: " + formatted;
+
+        }
+
+
+        /* ==========================================
+           MAIN DASHBOARD FUNCTION
+        ========================================== */
+
+        function loadDashboardData() {
+
+            const students =
+                getStudents();
+
+
+            /*
+                Update cards
+            */
+
+            updateStatistics(
+                students
+            );
+
+
+            /*
+                Update recent students
+            */
+
+            renderRecentStudents(
+                students
+            );
+
+
+            /*
+                Update charts
+            */
+
+            createPerformanceChart(
+                students
+            );
+
+
+            createCourseChart(
+                students
+            );
+
+
+            /*
+                Update timestamp
+            */
+
+            updateTime();
+
+        }
+
+
+        /* ==========================================
+           PAGE LOAD
+        ========================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                loadDashboardData();
+
+            }
+        );
+
+
+        /* ==========================================
+           LISTEN FOR LOCAL STORAGE CHANGES
+        ========================================== */
+
+        window.addEventListener(
+            "storage",
+            function(event) {
+
+                if (
+                    event.key
+                    === "eduTrackStudents"
+                ) {
+
+                    loadDashboardData();
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
+
 </html>
